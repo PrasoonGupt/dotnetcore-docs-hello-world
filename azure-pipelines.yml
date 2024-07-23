@@ -22,7 +22,6 @@ steps:
     includePreviewVersions: true # Required for preview versions
 
 # Dependency are restored in this stage
-steps:
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
@@ -31,7 +30,6 @@ steps:
     feedsToUse: config
 
 # Build stage 
-steps:
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
@@ -40,7 +38,7 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
 
 # Packaging stage (Publishing and zipping code)
-steps:
+
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
