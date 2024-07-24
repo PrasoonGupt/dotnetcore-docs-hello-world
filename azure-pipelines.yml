@@ -28,7 +28,11 @@ steps:
     command: restore
     projects: '**/*.csproj'
     feedsToUse: config
-
+- task: SonarQubePrepare@6
+  inputs:
+    SonarQube: 'Sonarqube'
+    scannerMode: 'MSBuild'
+    projectKey: 'Test_Prasoon_Test_Prasoon_f62aa0b0-7a77-4c6a-9d79-a2072b99af00'
 # Build stage 
 - task: DotNetCoreCLI@2
   displayName: Build
@@ -36,6 +40,14 @@ steps:
     command: build
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
+
+- task: SonarQubeAnalyze@6
+  inputs:
+    jdkversion: 'JAVA_HOME_17_X64'
+
+- task: SonarQubePublish@6
+  inputs:
+    pollingTimeoutSec: '300'
 
 # Packaging stage (Publishing and zipping code)
 
