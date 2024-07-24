@@ -34,6 +34,9 @@ steps:
     SonarQube: 'Sonarqube'
     scannerMode: 'MSBuild'
     projectKey: 'Test_Prasoon_Test_Prasoon_f62aa0b0-7a77-4c6a-9d79-a2072b99af00'
+    # Remove the sonar.branch.name property
+    # extraProperties: |
+    #   sonar.branch.name=$(Build.SourceBranch)
     sonar.verbose: true
 # Build stage 
 - task: DotNetCoreCLI@2
