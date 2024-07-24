@@ -28,11 +28,13 @@ steps:
     command: restore
     projects: '**/*.csproj'
     feedsToUse: config
+# Sonarqube prepare step
 - task: SonarQubePrepare@6
   inputs:
     SonarQube: 'Sonarqube'
     scannerMode: 'MSBuild'
     projectKey: 'Test_Prasoon_Test_Prasoon_f62aa0b0-7a77-4c6a-9d79-a2072b99af00'
+    sonar.verbose: true
 # Build stage 
 - task: DotNetCoreCLI@2
   displayName: Build
