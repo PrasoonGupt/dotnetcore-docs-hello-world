@@ -46,10 +46,12 @@ steps:
 - task: SonarQubeAnalyze@6
   inputs:
     jdkversion: 'JAVA_HOME_17_X64'
+    sonar.verbose: true
 
 - task: SonarQubePublish@6
   inputs:
     pollingTimeoutSec: '300'
+    sonar.verbose: true
 
 # Packaging stage (Publishing and zipping code)
 
