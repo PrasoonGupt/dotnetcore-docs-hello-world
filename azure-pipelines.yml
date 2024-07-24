@@ -12,7 +12,7 @@ pool:
 variables:
   buildConfiguration: 'Release'
 
-# Dat net Core SDK is installed and the latest and pre release version is checked.
+# Install .NET Core SDK
 steps:
 - task: UseDotNet@2
   displayName: 'Install .NET Core SDK'
@@ -21,23 +21,23 @@ steps:
     performMultiLevelLookup: true
     includePreviewVersions: true # Required for preview versions
 
-# Dependency are restored in this stage
+# Restore dependencies
 - task: DotNetCoreCLI@2
   displayName: Restore
   inputs:
     command: restore
     projects: '**/*.csproj'
     feedsToUse: config
-# Sonarqube prepare step
+
+# Prepare SonarQube analysis
 - task: SonarQubePrepare@5
   inputs:
     SonarQube: 'Sonarqube'
     scannerMode: 'MSBuild'
     projectKey: 'Test_Prasoon_Test_Prasoon_f62aa0b0-7a77-4c6a-9d79-a2072b99af00'
-    extraProperties: |
-      sonar.branch.name=$(Build.SourceBranch)
     sonar.verbose: true
-# Build stage 
+
+# Build the project
 - task: DotNetCoreCLI@2
   displayName: Build
   inputs:
@@ -45,18 +45,19 @@ steps:
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
+# Analyze with SonarQube
 - task: SonarQubeAnalyze@5
   inputs:
     jdkversion: 'JAVA_HOME_17_X64'
     sonar.verbose: true
 
+# Publish SonarQube results
 - task: SonarQubePublish@5
   inputs:
     pollingTimeoutSec: '300'
     sonar.verbose: true
 
 # Packaging stage (Publishing and zipping code)
-
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
@@ -64,7 +65,7 @@ steps:
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
 
-# this code takes all the files in $(Build.ArtifactStagingDirectory) and uploads them as an artifact of your build.
+# Publish the artifact
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
