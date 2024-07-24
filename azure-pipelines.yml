@@ -32,7 +32,7 @@ steps:
 # Prepare SonarQube analysis
 - task: SonarQubePrepare@5
   inputs:
-    SonarQube: 'Sonarqube'
+    SonarQube: 'SonarQube'
     scannerMode: 'MSBuild'
     projectKey: 'Test_Prasoon_Pipelines_Test_Prasoon_Pipelines_4ee0ec6f-6646-4576-a2d4-dfb06a4ff0bd'
     sonar.verbose: true
