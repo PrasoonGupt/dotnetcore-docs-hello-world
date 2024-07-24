@@ -34,7 +34,7 @@ steps:
   inputs:
     SonarQube: 'Sonarqube'
     scannerMode: 'MSBuild'
-    projectKey: 'Test_Prasoon_Test_Prasoon_f62aa0b0-7a77-4c6a-9d79-a2072b99af00'
+    projectKey: 'Test_Prasoon_Pipelines_Test_Prasoon_Pipelines_4ee0ec6f-6646-4576-a2d4-dfb06a4ff0bd'
     sonar.verbose: true
 
 # Build the project
